@@ -1,13 +1,13 @@
-# 🚀 ResumeAI Pro - Elite AI Resume Builder
+# 🚀 Resume.IO Pro - Elite AI Resume Builder
 
-![ResumeAI Pro Banner](https://img.shields.io/badge/Status-Production--Ready-emerald?style=for-the-badge&logo=vercel)
+![Resume.IO Pro Banner](https://img.shields.io/badge/Status-Production--Ready-emerald?style=for-the-badge&logo=vercel)
 ![Next.js](https://img.shields.io/badge/Next.js-16.1.6-black?style=for-the-badge&logo=next.js)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind--CSS-4.x-blue?style=for-the-badge&logo=tailwind-css)
 ![Mongoose](https://img.shields.io/badge/Database-MongoDB-47A248?style=for-the-badge&logo=mongodb)
 
 Designed and Developed with ❤️ by **Abdul Haseeb Imran**.
 
-ResumeAI Pro is a world-class, high-fidelity AI-powered resume builder designed to help professionals land their dream jobs. It leverages advanced AI to generate high-impact content, optimize for ATS (Applicant Tracking Systems), and provide real-time feedback through a stunning, modern interface.
+Resume.IO Pro is a world-class, high-fidelity AI-powered resume builder designed to help professionals land their dream jobs. It leverages advanced AI to generate high-impact content, optimize for ATS (Applicant Tracking Systems), and provide real-time feedback through a stunning, modern interface.
 
 ---
 
@@ -37,8 +37,8 @@ ResumeAI Pro is a world-class, high-fidelity AI-powered resume builder designed 
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/abdulhaseebimran/Resmue.io.git
-cd Resmue.io
+git clone https://github.com/abdulhaseebimran/Resume.IO.git
+cd Resume.IO
 ```
 
 ### 2. Install dependencies
@@ -86,4 +86,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📬 Contact
 **Abdul Haseeb Imran** - [GitHub](https://github.com/abdulhaseebimran)
-Project Link: [https://github.com/abdulhaseebimran/Resmue.io](https://github.com/abdulhaseebimran/Resmue.io)
+Project Link: [https://github.com/abdulhaseebimran/Resume.IO](https://github.com/abdulhaseebimran/Resume.IO)
