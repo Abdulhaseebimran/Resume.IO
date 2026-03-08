@@ -54,31 +54,40 @@ export const generateAIContent = async (prompt: string) => {
     }
 
     if (OPENROUTER_API_KEY) {
-        try {
-            console.log("AI: Trying OpenRouter Fallback (Llama-3)...");
-            const response = await axios.post(
-                "https://openrouter.ai/api/v1/chat/completions",
-                {
-                    model: "meta-llama/llama-3.1-8b-instruct:free",
-                    messages: [{ role: "user", content: prompt }],
-                },
-                {
-                    headers: {
-                        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
-                        "Content-Type": "application/json",
-                        "X-Title": "ResumeAI Pro"
-                    },
-                    timeout: 30000
-                }
-            );
+        const orModels = [
+            "meta-llama/llama-3.1-8b-instruct:free",
+            "google/gemini-2.0-flash-exp:free",
+            "mistralai/mistral-7b-instruct:free",
+            "gryphe/mythomist-7b:free"
+        ];
 
-            const content = response.data?.choices?.[0]?.message?.content;
-            if (content) {
-                console.log("AI: SUCCESS with OpenRouter Fallback");
-                return content.trim();
+        for (const model of orModels) {
+            try {
+                console.log(`AI: Trying OpenRouter Fallback (${model})...`);
+                const response = await axios.post(
+                    "https://openrouter.ai/api/v1/chat/completions",
+                    {
+                        model: model,
+                        messages: [{ role: "user", content: prompt }],
+                    },
+                    {
+                        headers: {
+                            "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+                            "Content-Type": "application/json",
+                            "X-Title": "Resume.IO Pro"
+                        },
+                        timeout: 30000
+                    }
+                );
+
+                const content = response.data?.choices?.[0]?.message?.content;
+                if (content) {
+                    console.log(`AI: SUCCESS with OpenRouter (${model})`);
+                    return content.trim();
+                }
+            } catch (err: any) {
+                console.warn(`AI: OpenRouter model ${model} failed:`, err.message);
             }
-        } catch (err: any) {
-            console.error("AI: OpenRouter fallback failed:", err.message);
         }
     }
 
