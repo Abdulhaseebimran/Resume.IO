@@ -12,7 +12,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "ResumeAI Pro - Intelligent Resume Builder",
-  description: "Create professional, ATS-friendly resumes in minutes with the power of Claude AI.",
+  description: "Create professional, ATS-friendly resumes in minutes with the power of AI.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
