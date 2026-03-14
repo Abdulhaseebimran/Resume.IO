@@ -1,7 +1,7 @@
 import dbConnect from "./mongodb";
 import AIUsage from "@/models/AIUsage";
 
-const FREE_TIER_DAILY_LIMIT = 15; // Increased to 15 for better user experience
+const FREE_TIER_DAILY_LIMIT = 15;
 
 export async function checkUserQuota(userId: string): Promise<{ allowed: boolean; remaining: number }> {
     await dbConnect();
@@ -29,7 +29,7 @@ export async function incrementUserQuota(userId: string): Promise<void> {
     await AIUsage.findOneAndUpdate(
         { userId, date: today },
         { $inc: { count: 1 } },
-        { upsert: true }
+        { upsert: true, returnDocument: 'after' }
     );
 }
 

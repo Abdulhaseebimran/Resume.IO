@@ -60,7 +60,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
         const updatedResume = await Resume.findOneAndUpdate(
             { _id: id, userId: dbUser._id },
             { $set: updateData },
-            { new: true, returnDocument: 'after' }
+            { returnDocument: 'after' }
         );
 
         if (!updatedResume) {

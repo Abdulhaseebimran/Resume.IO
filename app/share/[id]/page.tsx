@@ -55,35 +55,36 @@ export default function PublicSharePage() {
             {/* Premium Public Navigation */}
             <nav className="h-16 bg-primary-bg/80 backdrop-blur-md border-b border-border-custom sticky top-0 z-50 transition-all no-print print:hidden">
                 <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <div className="w-9 h-9 bg-accent rounded-xl flex items-center justify-center shadow-lg shadow-accent/20">
-                            <Sparkles className="text-white" size={20} />
+                    <div className="flex items-center gap-2 shrink-0">
+                        <div className="w-8 h-8 sm:w-9 sm:h-9 bg-accent rounded-xl flex items-center justify-center shadow-lg shadow-accent/20">
+                            <Sparkles className="text-white w-4 h-4 sm:w-5 sm:h-5" />
                         </div>
-                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-accent to-blue-400">
+                        <span className="text-lg sm:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-accent to-blue-400 hidden xs:block sm:block truncate max-w-[120px] sm:max-w-none">
                             ResumeAI Pro
                         </span>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 sm:gap-4 shrink-0">
                         <button
                             onClick={handlePrint}
-                            className="flex items-center gap-2 px-5 py-2.5 bg-accent text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-accent/90 transition-all shadow-lg shadow-accent/20 active:scale-95"
+                            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-accent text-white rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-accent/90 transition-all shadow-lg shadow-accent/20 active:scale-95 shrink-0"
                         >
-                            <Printer size={14} />
-                            Print / PDF
+                            <Printer size={14} className="w-3.5 h-3.5 sm:w-3.5 sm:h-3.5" />
+                            <span className="hidden sm:inline">Print / PDF</span>
+                            <span className="sm:hidden">Print</span>
                         </button>
                         <div className="h-6 w-px bg-border-custom"></div>
-                        <div className="flex items-center gap-2 px-3 py-1.5 bg-secondary-bg border border-border-custom rounded-full">
+                        <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-secondary-bg border border-border-custom rounded-full shrink-0">
                             <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></div>
-                            <span className="text-[10px] font-bold text-text-secondary uppercase tracking-widest">Public View</span>
+                            <span className="text-[8px] sm:text-[10px] font-bold text-text-secondary uppercase tracking-widest whitespace-nowrap">Public View</span>
                         </div>
                     </div>
                 </div>
             </nav>
 
             {/* Resume Content Container */}
-            <main className="max-w-[850px] mx-auto pt-10 px-4 print:pt-0 print:px-0 print:max-w-none">
-                <div className="bg-white shadow-2xl shadow-slate-200 rounded-xl overflow-hidden print:shadow-none print:rounded-none">
+            <main className="max-w-[850px] mx-auto pt-6 sm:pt-10 px-0 sm:px-4 print:pt-0 print:px-0 print:max-w-none overflow-x-auto pb-6">
+                <div id="resume-preview-container" className="bg-white sm:shadow-2xl sm:shadow-slate-200 sm:rounded-xl overflow-hidden print:shadow-none print:rounded-none min-w-[700px] sm:min-w-[800px] mx-auto w-fit">
                     <TemplateRenderer
                         templateId={resume.template || "modern-minimal"}
                         data={resume}

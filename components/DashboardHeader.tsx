@@ -38,6 +38,15 @@ export function DashboardHeader() {
                             <p className="text-xs text-text-secondary mt-1">{session?.user?.email}</p>
                         </div>
 
+                        {/* User Avatar */}
+                        <div className="w-10 h-10 rounded-full border border-border-custom bg-secondary-bg overflow-hidden flex items-center justify-center relative group">
+                            {session?.user?.image ? (
+                                <img src={session.user.image} alt="User" className="w-full h-full object-cover" />
+                            ) : (
+                                <User size={20} className="text-text-secondary" />
+                            )}
+                        </div>
+
                         <button
                             onClick={() => signOut({ callbackUrl: "/" })}
                             className="p-2 mr-2 rounded-lg bg-secondary-bg border border-border-custom text-text-secondary hover:text-red-500 hover:bg-red-500/10 transition-all duration-300"

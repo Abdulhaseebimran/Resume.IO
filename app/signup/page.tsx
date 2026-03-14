@@ -28,18 +28,8 @@ export default function SignupPage() {
                 password,
             });
 
-            // Automatically sign in after signup
-            const res = await signIn("credentials", {
-                redirect: false,
-                email,
-                password,
-            });
-
-            if (res?.error) {
-                router.push("/login");
-            } else {
-                router.push("/dashboard");
-            }
+            // Redirect to login after successful signup (as requested)
+            router.push("/login?signup=success");
         } catch (err: any) {
             setError(err.response?.data?.message || "Something went wrong. Please try again.");
         } finally {
@@ -66,7 +56,7 @@ export default function SignupPage() {
                     <p className="text-text-secondary">Start building your professional resume today</p>
                 </div>
 
-                <div className="bg-card-bg p-8 rounded-2xl border border-border-custom shadow-xl">
+                <div className="bg-card-bg p-6 sm:p-8 rounded-2xl border border-border-custom shadow-xl">
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {error && (
                             <div className="bg-red-500/10 border border-red-500/20 text-red-500 text-sm p-3 rounded-lg flex items-center gap-2 animate-in slide-in-from-top-1">

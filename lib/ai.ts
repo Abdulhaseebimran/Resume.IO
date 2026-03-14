@@ -7,7 +7,7 @@ const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const AI_CACHE = new Map<string, string>();
 
 export const generateAIContent = async (prompt: string) => {
-    console.log(`AI: Request started. Keys present: OpenRouter=${!!OPENROUTER_API_KEY}, Gemini=${!!GEMINI_API_KEY}`);
+    console.log(`AI: Request started. Keys detected: OpenRouter=${!!OPENROUTER_API_KEY}, Gemini=${!!GEMINI_API_KEY}`);
     let lastError = "";
 
     // 1. Check Cache First
@@ -16,19 +16,23 @@ export const generateAIContent = async (prompt: string) => {
         return AI_CACHE.get(prompt);
     }
 
-    // 2. Try OpenRouter (FREE & Elite Models First)
+    // 2. Try OpenRouter (LATEST 2026 FREE MODELS)
     if (OPENROUTER_API_KEY) {
         const orModels = [
-            "meta-llama/llama-3.3-70b-instruct:free", // Elite Quality (Free)
-            "google/gemini-2.0-flash-exp:free",      // Google's Next-Gen (Free)
-            "meta-llama/llama-3.1-8b-instruct:free",  // High Speed (Free)
-            "mistralai/mistral-7b-instruct:free",      // Reliable (Free)
-            "qwen/qwen-2-7b-instruct:free"
+            "openrouter/free",              // Intelligent Free Router (Best for 2026)
+            "google/gemma-3-4b:free",       // New Gemma 3 (Ultra Reliable)
+            "google/gemma-3-12b:free",      // High Quality Gemma 3
+            "google/gemma-3n-4b:free",      // Optimized Gemma 3
+            "meta-llama/llama-3.1-8b-instruct:free",
+            "microsoft/phi-3-mini-128k-instruct:free"
         ];
+
+        // Extreme key cleaning (removes ANY hidden chars like quotes or spaces)
+        const cleanKey = OPENROUTER_API_KEY.trim().replace(/['"]+/g, '').replace(/[^a-zA-Z0-9_-]/g, '');
 
         for (const model of orModels) {
             try {
-                console.log(`AI: 🚀 Trying OpenRouter Elite (${model})...`);
+                console.log(`AI: 🚀 Trying OpenRouter (Free) -> ${model}`);
                 const response = await axios.post(
                     "https://openrouter.ai/api/v1/chat/completions",
                     {
@@ -37,71 +41,66 @@ export const generateAIContent = async (prompt: string) => {
                     },
                     {
                         headers: {
-                            "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+                            "Authorization": `Bearer ${cleanKey}`,
                             "Content-Type": "application/json",
-                            "HTTP-Referer": "https://resume-io-9wk7.vercel.app",
-                            "X-Title": "Resume.IO Pro"
+                            "HTTP-Referer": "http://localhost:3000",
+                            "X-Title": "ResumeAI Pro"
                         },
-                        timeout: 30000
+                        timeout: 50000
                     }
                 );
 
                 const content = response.data?.choices?.[0]?.message?.content;
-                if (content) {
-                    console.log(`AI: ✅ SUCCESS with OpenRouter (${model})`);
+                if (content && content.length > 3) {
+                    console.log(`AI: ✅ SUCCESS with OpenRouter [${model}]`);
                     const result = content.trim();
-                    AI_CACHE.set(prompt, result); // Cache the result
+                    AI_CACHE.set(prompt, result);
                     return result;
                 }
             } catch (err: any) {
-                const errMsg = err.response?.data?.error?.message || err.message;
-                lastError = `OpenRouter (${model}): ${errMsg}`;
-                console.warn(`AI: ⚠️ ${lastError} failed.`);
+                const status = err.response?.status;
+                const msg = err.response?.data?.error?.message || err.message;
+                lastError = `OpenRouter (${model}): ${msg}`;
+                console.warn(`AI: ⚠️ ${lastError}`);
+
+                // If it's a critical auth error, don't keep trying models
+                if (status === 401 || status === 403) break;
             }
         }
     }
 
-    // 3. Try Direct Gemini (Multiple versions)
+    // 3. Try Direct Gemini (Stable Fallback)
     if (GEMINI_API_KEY) {
-        const geminiModels = [
-            { ver: "v1beta", model: "gemini-2.0-flash" },
-            { ver: "v1beta", model: "gemini-1.5-flash" },
-            { ver: "v1", model: "gemini-1.5-flash" }
+        const cleanGemKey = GEMINI_API_KEY.trim().replace(/['"]+/g, '').replace(/[^a-zA-Z0-9_-]/g, '');
+        const endpoints = [
+            { ver: "v1", m: "gemini-1.5-flash" },
+            { ver: "v1beta", m: "gemini-1.5-flash" },
+            { ver: "v1beta", m: "gemini-2.0-flash" }
         ];
 
-        for (const { ver, model } of geminiModels) {
+        for (const { ver, m } of endpoints) {
             try {
-                console.log(`AI: 🔄 Trying Direct Gemini ${model} (${ver})...`);
+                console.log(`AI: 🔄 Trying Gemini -> ${m} (${ver})`);
                 const response = await axios.post(
-                    `https://generativelanguage.googleapis.com/${ver}/models/${model}:generateContent?key=${GEMINI_API_KEY}`,
-                    {
-                        contents: [{ parts: [{ text: prompt }] }],
-                    },
-                    { timeout: 20000 }
+                    `https://generativelanguage.googleapis.com/${ver}/models/${m}:generateContent?key=${cleanGemKey}`,
+                    { contents: [{ parts: [{ text: prompt }] }] },
+                    { timeout: 30000 }
                 );
 
                 const text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (text) {
-                    console.log(`AI: ✅ SUCCESS with Direct Gemini (${model})`);
+                if (text && text.length > 5) {
+                    console.log(`AI: ✅ SUCCESS with Direct Gemini`);
                     const result = text.replace(/^```[a-z]*\n/i, "").replace(/\n```$/i, "").trim();
-                    AI_CACHE.set(prompt, result); // Cache the result
+                    AI_CACHE.set(prompt, result);
                     return result;
                 }
             } catch (err: any) {
                 const msg = err.response?.data?.error?.message || err.message;
-                lastError = `Gemini (${model}): ${msg}`;
-                console.warn(`AI: ⚠️ ${lastError} failed.`);
+                lastError = `Gemini (${m}): ${msg}`;
+                console.warn(`AI: ⚠️ ${lastError}`);
             }
         }
     }
 
-    // Prepare a descriptive error message based on what happened
-    let diagnosticMsg = "System Error: All AI providers failed. ";
-    if (!OPENROUTER_API_KEY && !GEMINI_API_KEY) {
-        diagnosticMsg += "AI keys are missing in .env.local.";
-    } else {
-        diagnosticMsg += `Last Error: ${lastError || "Services busy"}. Please try again in 1 minute.`;
-    }
-
-    throw new Error(diagnosticMsg);
+    throw new Error(`AI System exhausted all free providers. Last Reason: ${lastError}`);
 };

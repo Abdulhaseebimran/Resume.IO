@@ -11,6 +11,7 @@ const ResumeSchema = new Schema(
             location: String,
             linkedIn: String,
             portfolio: String,
+            profileImage: String,
         },
         summary: { type: String },
         experience: [

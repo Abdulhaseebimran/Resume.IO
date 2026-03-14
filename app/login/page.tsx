@@ -14,6 +14,16 @@ export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [signupSuccess, setSignupSuccess] = useState(false);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get("signup") === "success") {
+                setSignupSuccess(true);
+            }
+        }
+    }, []);
 
     useEffect(() => {
         if (status === "authenticated") {
@@ -65,12 +75,19 @@ export default function LoginPage() {
                     <p className="text-text-secondary">Please sign in to your account</p>
                 </div>
 
-                <div className="bg-card-bg p-8 rounded-2xl border border-border-custom shadow-xl">
+                <div className="bg-card-bg p-6 sm:p-8 rounded-2xl border border-border-custom shadow-xl">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {error && (
                             <div className="bg-red-500/10 border border-red-500/20 text-red-500 text-sm p-3 rounded-lg flex items-center gap-2 animate-in slide-in-from-top-1">
                                 <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
                                 {error}
+                            </div>
+                        )}
+
+                        {signupSuccess && (
+                            <div className="bg-green-500/10 border border-green-500/20 text-green-500 text-sm p-3 rounded-lg flex items-center gap-2 animate-in slide-in-from-top-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                Account created successfully! Please sign in.
                             </div>
                         )}
 
@@ -92,7 +109,7 @@ export default function LoginPage() {
                         <div className="space-y-2">
                             <div className="flex items-center justify-between">
                                 <label className="text-sm font-medium text-text-primary">Password</label>
-                                <Link href="#" className="text-xs text-accent hover:underline">Forgot password?</Link>
+                                <a href="/forgot-password" title="Click to reset your password" className="text-xs text-accent hover:underline font-medium">Forgot password?</a>
                             </div>
                             <div className="relative">
                                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary" size={18} />

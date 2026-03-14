@@ -263,9 +263,9 @@ export default function ResumeEditor() {
                 </div>
             </header>
 
-            <div className="flex-1 flex overflow-hidden">
-                <div className="w-1/2 overflow-y-auto bg-secondary-bg/30 border-r border-border-custom custom-scrollbar no-print">
-                    <div className="p-8 max-w-2xl mx-auto pb-32 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+                <div className="w-full lg:w-1/2 h-1/2 lg:h-auto overflow-y-auto bg-secondary-bg/30 border-b lg:border-b-0 lg:border-r border-border-custom custom-scrollbar no-print relative relative-z-10 shadow-lg lg:shadow-none">
+                    <div className="p-4 sm:p-8 max-w-2xl mx-auto pb-32 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         {activeTab === "content" ? (
                             <div key={activeSection}>
                                 {activeSection === "personal" && <PersonalInfo />}
@@ -334,8 +334,8 @@ export default function ResumeEditor() {
                     </div>
                 </div>
 
-                <div className="flex-1 bg-slate-100 dark:bg-slate-900 overflow-y-auto p-12 flex justify-center custom-scrollbar">
-                    <div id="resume-preview-container" className="w-[800px] bg-white shadow-2xl rounded-lg h-fit transition-all origin-top scale-[0.8] lg:scale-[0.9] print:scale-100 print:shadow-none">
+                <div className="w-full lg:w-1/2 flex-1 bg-slate-100 dark:bg-slate-900 overflow-y-auto h-1/2 lg:h-auto p-4 sm:p-12 flex justify-center custom-scrollbar relative">
+                    <div id="resume-preview-container" className="w-[800px] bg-white shadow-2xl rounded-lg h-fit transition-all origin-top scale-[0.42] sm:scale-[0.6] lg:scale-[0.8] xl:scale-[0.9] print:scale-100 print:shadow-none print:rounded-none a4-page-guide absolute top-4 sm:top-12 lg:relative lg:top-auto">
                         <TemplateRenderer
                             templateId={resume?.template || "modern-minimal"}
                             data={resume}

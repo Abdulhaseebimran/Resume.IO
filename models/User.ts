@@ -8,6 +8,8 @@ const UserSchema = new Schema(
         profileImage: { type: String },
         provider: { type: String, default: "credentials" },
         theme: { type: String, default: "light" },
+        resetToken: { type: String },
+        resetTokenExpiry: { type: Date },
     },
     { timestamps: true }
 );

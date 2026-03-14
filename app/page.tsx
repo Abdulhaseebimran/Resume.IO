@@ -18,15 +18,15 @@ export default async function Home() {
       <nav className="fixed top-0 w-full z-[100] transition-all duration-300">
         <div className="absolute inset-0 bg-primary-bg/60 backdrop-blur-xl border-b border-border-custom/50"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative">
-          <div className="flex items-center gap-3 group cursor-pointer">
-            <div className="w-12 h-12 bg-gradient-to-br from-accent to-blue-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-accent/20 rotate-[-4deg] group-hover:rotate-0 transition-all duration-500">
-              <FileText className="text-white" size={26} />
+          <div className="flex items-center gap-2 sm:gap-3 group cursor-pointer shrink-0 min-w-0 pr-2">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-accent to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-2xl shadow-accent/20 rotate-[-4deg] group-hover:rotate-0 transition-all duration-500 shrink-0">
+              <FileText className="text-white w-5 h-5 sm:w-[26px] sm:h-[26px]" />
             </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-black tracking-tight text-text-primary leading-none">
+            <div className="flex flex-col min-w-0">
+              <span className="text-lg sm:text-2xl font-black tracking-tight text-text-primary leading-none truncate">
                 ResumeAI<span className="text-accent italic">.</span>
               </span>
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent/60">Professional</span>
+              <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] text-accent/60 truncate mt-0.5">Professional</span>
             </div>
           </div>
 
@@ -36,7 +36,7 @@ export default async function Home() {
             ))}
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 sm:gap-6 shrink-0">
             <ThemeToggle />
             <div className="h-6 w-[1px] bg-border-custom hidden sm:block" />
             <Link
@@ -47,10 +47,10 @@ export default async function Home() {
             </Link>
             <Link
               href="/signup"
-              className="btn-gradient !rounded-full !px-8 hover:scale-105 active:scale-95 transition-all shadow-xl shadow-accent/20 group"
+              className="btn-gradient !rounded-full !px-4 sm:!px-8 !py-2 sm:!py-3 hover:scale-105 active:scale-95 transition-all shadow-xl shadow-accent/20 group flex items-center justify-center shrink-0"
             >
-              <span className="text-sm font-black uppercase tracking-widest">Get Started</span>
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
+              <span className="text-[10px] sm:text-sm font-black uppercase tracking-widest whitespace-nowrap">Get Started</span>
+              <ArrowRight className="ml-1 sm:ml-2 group-hover:translate-x-1 transition-transform w-3.5 h-3.5 sm:w-[18px] sm:h-[18px]" />
             </Link>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default async function Home() {
 
       <main>
         {/* Elite Hero Section */}
-        <section className="relative pt-48 pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <section className="relative pt-32 md:pt-48 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
           {/* Animated Background Orbs */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full -z-10">
             <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-accent/20 rounded-full blur-[120px] animate-pulse"></div>
@@ -66,22 +66,22 @@ export default async function Home() {
           </div>
 
           <div className="max-w-7xl mx-auto text-center relative">
-            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-accent/5 border border-accent/10 text-accent font-black text-xs uppercase tracking-[0.2em] mb-10 animate-in fade-in slide-in-from-top-4 duration-700">
-              <Sparkles size={14} className="animate-spin-slow" />
-              <span>Next-Gen AI Resume Builder</span>
+            <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-2.5 rounded-full bg-accent/5 border border-accent/10 text-accent font-black text-[10px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] mb-8 md:mb-10 animate-in fade-in slide-in-from-top-4 duration-700">
+              <Sparkles size={14} className="animate-spin-slow flex-shrink-0" />
+              <span className="truncate">Next-Gen AI Resume Builder</span>
             </div>
 
-            <h1 className="text-6xl md:text-8xl font-black text-text-primary tracking-[-0.04em] leading-[0.9] mb-10 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150">
-              Craft Your Future with <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-blue-500 to-indigo-600">AI Perfection.</span>
+            <h1 className="text-5xl md:text-6xl lg:text-8xl font-black text-text-primary tracking-[-0.04em] leading-[1.1] md:leading-[0.9] mb-6 md:mb-10 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150">
+              Craft Your Future with <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-blue-500 to-indigo-600 block md:inline mt-2 md:mt-0">AI Perfection.</span>
             </h1>
 
-            <p className="max-w-3xl mx-auto text-xl md:text-2xl text-text-secondary leading-relaxed mb-14 font-medium animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
+            <p className="max-w-3xl mx-auto text-lg md:text-xl lg:text-2xl text-text-secondary leading-relaxed mb-10 md:mb-14 font-medium animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 px-2 md:px-0">
               The world's most advanced AI resume builder. Designed by Abdul Haseeb to beat ATS,
               impress recruiters, and land you the job you deserve in seconds.
             </p>
 
-            <div className="flex flex-col sm:row items-center justify-center gap-6 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
               <Link href="/signup" className="group btn-gradient text-lg px-12 py-5 !rounded-2xl shadow-2xl shadow-accent/30 hover:shadow-accent/50 transition-all flex items-center justify-center w-full sm:w-auto">
                 <span className="font-black uppercase tracking-widest">Build My Resume</span>
                 <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" size={24} />
@@ -150,7 +150,7 @@ export default async function Home() {
           </div>
 
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:row items-end justify-between mb-20 gap-8">
+            <div className="flex flex-col md:flex-row items-center md:items-end justify-between mb-20 gap-8 text-center md:text-left">
               <div className="max-w-2xl">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent font-black text-[10px] uppercase tracking-widest mb-6">
                   <Sparkles size={12} />
@@ -161,7 +161,7 @@ export default async function Home() {
                   <span className="text-accent">Recruiters Adore.</span>
                 </h2>
               </div>
-              <p className="max-w-md text-text-secondary font-bold text-lg mb-2">
+              <p className="max-w-md text-text-secondary font-bold text-lg mb-2 text-center md:text-left">
                 Hand-crafted by design experts and career coaches to balance visual impact with perfect readability.
               </p>
             </div>
@@ -236,14 +236,14 @@ export default async function Home() {
                     <div className="w-3.5 h-3.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400/20"></div>
                     <div className="w-3.5 h-3.5 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/20"></div>
                   </div>
-                  <div className="flex-1 max-w-md mx-auto bg-primary-bg/50 px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-border-custom text-center">
+                  <div className="flex-1 max-w-md mx-auto hidden sm:block bg-primary-bg/50 px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest text-text-secondary border border-border-custom text-center truncate">
                     resumeai-pro.com/dashboard/editor
                   </div>
-                  <div className="w-20" /> {/* Spacer */}
+                  <div className="w-20 hidden sm:block" /> {/* Spacer */}
                 </div>
-                <div className="aspect-[16/10] bg-grid-slate-200 dark:bg-grid-slate-800 flex items-center justify-center p-12">
-                  <div className="w-full h-full bg-white dark:bg-slate-900 shadow-2xl rounded-[1.5rem] p-10 flex gap-10">
-                    <div className="w-[30%] space-y-8">
+                <div className="aspect-auto md:aspect-[16/10] bg-grid-slate-200 dark:bg-grid-slate-800 flex items-center justify-center p-6 md:p-12">
+                  <div className="w-full h-full bg-white dark:bg-slate-900 shadow-2xl rounded-[1.5rem] p-6 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10">
+                    <div className="w-full md:w-[30%] space-y-6 md:space-y-8">
                       <div className="h-10 bg-slate-100 dark:bg-slate-800 rounded-xl w-3/4"></div>
                       <div className="space-y-3">
                         <div className="h-3 bg-slate-100 dark:bg-slate-800 rounded-full w-full"></div>
@@ -260,7 +260,7 @@ export default async function Home() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-2xl p-6 flex flex-col gap-6">
+                    <div className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-2xl p-4 md:p-6 flex flex-col gap-4 md:gap-6">
                       <div className="h-6 bg-white dark:bg-slate-700 rounded-lg w-1/4"></div>
                       <div className="flex-1 bg-white dark:bg-slate-700 rounded-xl shadow-inner relative overflow-hidden">
                         <div className="absolute inset-x-0 top-0 h-2 bg-accent opacity-20"></div>
@@ -319,7 +319,7 @@ export default async function Home() {
                   )}
                   <h3 className="text-2xl font-black text-text-primary mb-2">{plan.name}</h3>
                   <div className="flex items-baseline gap-1 mb-8">
-                    <span className="text-text-secondary font-black mr-1 text-xl">Rs.</span>
+                    <span className="text-text-secondary font-black mr-1 text-xl">PKR</span>
                     <span className="text-4xl font-black text-text-primary">{plan.price}</span>
                     <span className="text-text-secondary font-bold">/mo</span>
                   </div>
@@ -392,8 +392,8 @@ export default async function Home() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-3xl -rotate-45 translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
             <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tight">Ready to Level Up Your Career?</h2>
             <p className="text-xl text-white/80 font-bold mb-12 max-w-2xl mx-auto">Join 50,000+ others who are already landing jobs with ResumeAI.</p>
-            <Link href="/signup" className="inline-flex py-5 px-12 bg-white text-accent rounded-2xl font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl">
-              Get Started Now
+            <Link href="/signup" className="inline-flex py-5 px-12 !bg-white !text-blue-600 hover:!bg-slate-100 rounded-2xl font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl z-[50] relative overflow-hidden">
+              <span className="relative z-10">Get Started Now</span>
             </Link>
           </div>
         </section>
@@ -402,8 +402,8 @@ export default async function Home() {
       {/* Extreme Footer */}
       <footer className="bg-card-bg border-t border-border-custom pt-24 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
-            <div className="col-span-1 md:col-span-1 border-r border-border-custom pr-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16 mb-20 text-center md:text-left">
+            <div className="col-span-1 md:col-span-1 border-b md:border-b-0 md:border-r border-border-custom pb-12 md:pb-0 md:pr-8 flex flex-col items-center md:items-start">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center shadow-lg">
                   <FileText className="text-white" size={22} />
@@ -424,7 +424,7 @@ export default async function Home() {
               </div>
             </div>
 
-            <div className="col-span-3 grid grid-cols-2 md:grid-cols-3 gap-12">
+            <div className="col-span-1 md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
               {[
                 { title: 'Platform', links: ['Templates', 'AI Features', 'ATS Statistics', 'Reviews'] },
                 { title: 'Company', links: ['About Us', 'Careers', 'Privacy Policy', 'Terms of Service'] },
@@ -444,9 +444,9 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="pt-12 border-t border-border-custom flex flex-col md:row items-center justify-between gap-8">
-            <p className="text-text-secondary text-xs font-black uppercase tracking-widest leading-none">
-              © 2026 ResumeAI Pro. All rights reserved. <span className="mx-2 opacity-20">|</span> Built with ❤️ by Abdul Haseeb Imran
+          <div className="pt-12 border-t border-border-custom flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <p className="text-text-secondary text-xs font-black uppercase tracking-widest leading-relaxed md:leading-none">
+              © 2026 ResumeAI Pro. All rights reserved. <span className="hidden md:inline mx-2 opacity-20">|</span><br className="md:hidden" /> Built with ❤️ by Abdul Haseeb Imran
             </p>
             <div className="flex items-center gap-3 text-xs font-black uppercase tracking-widest text-text-secondary">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
